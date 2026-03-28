@@ -14,9 +14,9 @@ List<InheritedProvider> get devProviders {
   final appSettingsRepository = AppSettingsRepositoryMock();
 
   return [
- 
     // 1 - Inject repositories
     Provider<SongRepository>(create: (_) => SongRepositoryFirebase()),
+
     Provider<ArtistRepository>(create: (_) => ArtistRepositoryFirebase()),
     
     // 2 - Inject the player state

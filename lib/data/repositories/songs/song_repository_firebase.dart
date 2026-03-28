@@ -12,8 +12,14 @@ class SongRepositoryFirebase extends SongRepository {
     '/artist/songs.json',
   );
 
+  List<Song>? _cacheSong;
+
   @override
   Future<List<Song>> fetchSongs() async {
+    if (_cacheSong != null) {
+      return _cacheSong!;
+    }
+
     final http.Response response = await http.get(songsUri);
 
     if (response.statusCode == 200) {
@@ -24,6 +30,8 @@ class SongRepositoryFirebase extends SongRepository {
       for (final entry in songJson.entries) {
         result.add(SongDto.fromJson(entry.key, entry.value));
       }
+
+      _cacheSong = result;
       return result;
     } else {
       // 2- Throw expcetion if any issue
@@ -50,5 +58,8 @@ class SongRepositoryFirebase extends SongRepository {
     if (response.statusCode != 200) {
       throw Exception('Failed to like song');
     }
+
+    // Force next fetch to return fresh values from Firebase.
+    _cacheSong = null;
   }
 }
