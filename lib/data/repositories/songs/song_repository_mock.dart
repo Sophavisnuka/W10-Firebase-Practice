@@ -22,4 +22,11 @@ class SongRepositoryMock implements SongRepository {
       );
     });
   }
+
+  @override
+  Future<void> likeSong(String songId, int like) {
+    return Future.delayed(Duration(seconds: 2), () {
+    
+    });
+  }
 }

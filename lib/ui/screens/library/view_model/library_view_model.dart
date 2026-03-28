@@ -70,6 +70,25 @@ class LibraryViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<String> likedSongId = [];
+
+  void likeCount(Song song) async {
+    try {
+      if (likedSongId.contains(song.id)) {
+        likedSongId.remove(song.id);
+      } else {
+        likedSongId.add(song.id);
+      }
+      notifyListeners();
+      await songRepository.likeSong(song.id, song.like);
+      fetchSong();
+    }catch(e) {
+      data = AsyncValue.error(e);
+      notifyListeners();
+    }
+  }
+  
+  bool isLiked(Song song) => likedSongId.contains(song.id);
   bool isSongPlaying(Song song) => playerState.currentSong == song;
 
   void start(Song song) => playerState.start(song);

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
- 
 import '../../../model/artist/artist.dart';
 import '../../dtos/artist_dto.dart';
 import 'artist_repository.dart';
