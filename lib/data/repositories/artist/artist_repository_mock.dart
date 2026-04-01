@@ -1,3 +1,5 @@
+import 'package:week10_firebase/model/comments/comment.dart';
+
 import '../../../model/artist/artist.dart';
 import 'artist_repository.dart';
 
@@ -20,4 +22,11 @@ class ArtistRepositoryMock implements ArtistRepository {
       );
     });
   }
+
+  Future<List<Comment>> fetchComments(String artistId) async {
+    return [];
+  }
+
+  @override
+  Future<void> addComment(String artistId, String text) async {}
 }

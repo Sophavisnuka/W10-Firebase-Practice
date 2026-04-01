@@ -1,4 +1,5 @@
 import 'package:provider/provider.dart';
+import 'package:week10_firebase/ui/screens/artists/view_model/artists_view_model.dart';
  
 import 'data/repositories/artist/artist_repository.dart';
 import 'data/repositories/artist/artist_repository_firebase.dart';
@@ -18,6 +19,11 @@ List<InheritedProvider> get devProviders {
     Provider<SongRepository>(create: (_) => SongRepositoryFirebase()),
 
     Provider<ArtistRepository>(create: (_) => ArtistRepositoryFirebase()),
+
+    ChangeNotifierProvider<ArtistsViewModel>(
+      create: (context) =>
+          ArtistsViewModel(artistRepository: context.read<ArtistRepository>()),
+    ),
     
     // 2 - Inject the player state
     ChangeNotifierProvider<PlayerState>(create: (_) => PlayerState()),

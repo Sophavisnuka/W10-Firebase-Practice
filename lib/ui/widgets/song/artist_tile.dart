@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:week10_firebase/ui/screens/artists/widgets/artist_comment.dart';
 import '../../../model/artist/artist.dart';
 
 class ArtistTile extends StatelessWidget {
-  const ArtistTile({
-    super.key,
-    required this.artist,
-    
-  });
+  const ArtistTile({super.key, required this.artist});
 
   final Artist artist;
 
@@ -24,6 +21,16 @@ class ArtistTile extends StatelessWidget {
           subtitle: Text("Genre: ${artist.genre}"),
           leading: CircleAvatar(
             backgroundImage: NetworkImage(artist.imageUrl.toString()),
+          ),
+          trailing: IconButton(
+            onPressed: () {
+              Navigator.of(
+                context,
+              ).push(
+                MaterialPageRoute(builder: (context) => ArtistComment(artist: artist,))
+              );
+            },
+            icon: Icon(Icons.comment),
           ),
         ),
       ),
